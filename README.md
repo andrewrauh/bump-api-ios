@@ -31,6 +31,7 @@ Notes
 Complete Example
 ================
 
+```Objective-C
 	- (void) configureBump {
 	    [BumpClient configureWithAPIKey:@"your_api_key" andUserID:[[UIDevice currentDevice] name]];
 
@@ -59,11 +60,11 @@ Complete Example
 			switch(event) {
 			    case BUMP_EVENT_BUMP:
 					NSLog(@"Bump detected.");
-				break;
+					break;
 			    case BUMP_EVENT_NO_MATCH:
-				NSLog(@"No match.");
+					NSLog(@"No match.");
 					break;
 			}
 	    }];
 	} 
-
+```
