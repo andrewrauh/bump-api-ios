@@ -49,9 +49,9 @@ Complete Example
 
 	    [[BumpClient sharedClient] setConnectionStateChangedBlock:^(BOOL connected) {
 			if (connected) {
-				    NSLog(@"Bump connected...");
+				NSLog(@"Bump connected...");
 			} else {
-			    NSLog(@"Bump disconnected...");
+				NSLog(@"Bump disconnected...");
 			}
 	    }];
 
