@@ -15,9 +15,9 @@ typedef enum {
 } bump_event;
 
 typedef void (^BumpEventBlock)(bump_event event);
-typedef void (^BumpMatchOccurredBlock)(BumpChannelID channelID);
+typedef void (^BumpMatchBlock)(BumpChannelID channelID);
+typedef void (^BumpChannelConfirmedBlock)(BumpChannelID channelID);
 typedef void (^BumpConnectionStateChangedBlock)(BOOL connectedToBumpServer);
-typedef void (^BumpHistoryChangedBlock)(NSArray *history);
 typedef void (^BumpDataReceivedBlock)(BumpChannelID channel, NSData *data);
 
 @interface BumpClient : NSObject {}
@@ -26,9 +26,11 @@ typedef void (^BumpDataReceivedBlock)(BumpChannelID channel, NSData *data);
 
 // required configuration
 + (void) configureWithAPIKey : (NSString *) key andUserID : (NSString *) userName;
-- (void) setMatchOccurredBlock : (BumpMatchOccurredBlock) matchBlock;
+- (void) setMatchBlock : (BumpMatchBlock) matchBlock;
+- (void) setChannelConfirmedBlock : (BumpChannelConfirmedBlock) confirmedBlock;
 
 // channel methods
+- (void) confirmMatch : (BOOL) confirmed onChannel : (BumpChannelID) channel;
 - (void) sendData : (NSData *) data toChannel : (BumpChannelID) channel;
 - (NSString *) userIDForChannel : (BumpChannelID) channelID;
 

@@ -27,16 +27,20 @@
 - (void) configureBump {
     [BumpClient configureWithAPIKey:@"your_api_key" andUserID:[[UIDevice currentDevice] name]];
 
-    [[BumpClient sharedClient] setMatchOccurredBlock:^(BumpChannelID channel) { 
+    [[BumpClient sharedClient] setMatchBlock:^(BumpChannelID channel) { 
         NSLog(@"Matched with user: %@", [[BumpClient sharedClient] userIDForChannel:channel]); 
-        
+        [[BumpClient sharedClient] confirmMatch:YES onChannel:channel];
+    }];
+    
+    [[BumpClient sharedClient] setChannelConfirmedBlock:^(BumpChannelID channel) {
+        NSLog(@"Channel with %@ confirmed.", [[BumpClient sharedClient] userIDForChannel:channel]);
         [[BumpClient sharedClient] sendData:[[NSString stringWithFormat:@"Hello, world!"] dataUsingEncoding:NSUTF8StringEncoding]
                                   toChannel:channel];
     }];
 
     [[BumpClient sharedClient] setDataReceivedBlock:^(BumpChannelID channel, NSData *data) {
-        NSLog(@"Data received on channel %llu: %@", 
-              channel, 
+        NSLog(@"Data received from %@: %@", 
+              [[BumpClient sharedClient] userIDForChannel:channel], 
               [NSString stringWithCString:[data bytes] encoding:NSUTF8StringEncoding]);
     }];
 

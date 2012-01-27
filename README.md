@@ -28,6 +28,15 @@ Notes
 1. Android builds coming soon.
 1. Please submit comments and questions to tg@bu.mp
 
+Release Notes
+=============
+
+Beta 2
+------
+* callback structure changed: BumpClient calls its `matchBlock` when a match occurs.  In order to create a channel (and send data), both users most call `[[BumpClient sharedClient] confirmMatch:YES onChannel:channel];`. When both users confirm a channel, then `BumpClient` will callback its `channelConfirmedBlock`.
+** see update examples for this new structure
+* API key status notification on stderr.
+
 Complete Example
 ================
 
@@ -36,17 +45,15 @@ Complete Example
     // userID is a string that you could use as the user's name, or an ID that is semantic within your environment
     [BumpClient configureWithAPIKey:@"your_api_key" andUserID:[[UIDevice currentDevice] name]];
 
-    [[BumpClient sharedClient] setMatchOccurredBlock:^(BumpChannelID channel) { 
+    [[BumpClient sharedClient] setMatchBlock:^(BumpChannelID channel) { 
 		NSLog(@"Matched with user: %@", [[BumpClient sharedClient] userIDForChannel:channel]); 
-		// data transfer is limited to 500k per message. email us (api@bu.mp) if you want to send larger messages	
-		[[BumpClient sharedClient] sendData:[[NSString stringWithFormat:@"Hello, world!"] dataUsingEncoding:NSUTF8StringEncoding]
-					  toChannel:channel];
+		[[BumpClient sharedClient] confirmMatch:YES onChannel:channel];
     }];
-
-    [[BumpClient sharedClient] setDataReceivedBlock:^(BumpChannelID channel, NSData *data) {
-		NSLog(@"Data received on channel %llu: %@", 
-		      channel, 
-		      [NSString stringWithCString:[data bytes] encoding:NSUTF8StringEncoding]);
+    
+    [[BumpClient sharedClient] setChannelConfirmedBlock:^(BumpChannelID channel) {
+		NSLog(@"Channel with %@ confirmed.", [[BumpClient sharedClient] userIDForChannel:channel]);
+		[[BumpClient sharedClient] sendData:[[NSString stringWithFormat:@"Hello, world!"] dataUsingEncoding:NSUTF8StringEncoding]
+                                  toChannel:channel];
     }];
 
     // optional callback
