@@ -34,7 +34,7 @@ Release Notes
 Beta 2
 ------
 * callback structure changed: BumpClient calls its `matchBlock` when a match occurs.  In order to create a channel (and send data), both users most call `[[BumpClient sharedClient] confirmMatch:YES onChannel:channel];`. When both users confirm a channel, then `BumpClient` will callback its `channelConfirmedBlock`.
-** see update examples for this new structure
+* See update examples for this new structure
 * API key status notification on stderr.
 
 Complete Example
