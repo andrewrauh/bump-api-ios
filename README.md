@@ -6,8 +6,7 @@ This is an all-new version of the Bump iOS API.
 Highlights
 ==========
 
-* faster
-* smaller
+* faster, smaller. block/GCD based callbacks.
 * multiple concurrent sessions: once two users have matched, they can continue to send data to each other and other users
 * at the moment breaks compatibility with earlier versions of the API
 
@@ -21,6 +20,13 @@ Getting Started
     `[BumpClient configureWithAPIKey:@"your_api_key" andUserID:[[UIDevice currentDevice] name]];`
 
 Congrats, that's it.  Your app is now bumpable!
+
+Notes
+=====
+
+1. Use of this library is subject to both our SDK License agreement, http://bu.mp/licagr_internaluse, and Trademark Guidelines: http://bu.mp/apitrademark
+1. Android builds coming soon.
+1. Please submit comments and questions to tg@bu.mp
 
 Complete Example
 ================
@@ -61,9 +67,3 @@ Complete Example
 	    }];
 	} 
 
-Notes
-=====
-
-1. Use of this library is subject to both our SDK License agreement, http://bu.mp/licagr_internaluse, and Trademark Guidelines: http://bu.mp/apitrademark
-1. Android builds coming soon.
-1. Please submit comments and questions to tg@bu.mp
