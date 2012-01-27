@@ -15,7 +15,7 @@ Getting Started
 
 1. Agree to the API license agreement and get your API key: http://bu.mp/apiagree
 1. Add libBump.a and BumpClient.h to your Xcode project.
-1. Ensure that your target is linked against libBump.a, CoreLocation.framework, and AudioToolbox.framework.
+1. Ensure that your target is linked against libBump.a, CFNetwork.framework, CoreLocation.framework, and AudioToolbox.framework.
 1. Configure your client:
     `[BumpClient configureWithAPIKey:@"your_api_key" andUserID:[[UIDevice currentDevice] name]];`
 
