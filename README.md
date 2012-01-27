@@ -56,6 +56,13 @@ Complete Example
                                   toChannel:channel];
     }];
 
+    [[BumpClient sharedClient] setDataReceivedBlock:^(BumpChannelID channel, NSData *data) {
+		NSLog(@"Data received from %@: %@", 
+		[[BumpClient sharedClient] userIDForChannel:channel], 
+		[NSString stringWithCString:[data bytes] encoding:NSUTF8StringEncoding]);
+    }];
+
+
     // optional callback
     [[BumpClient sharedClient] setConnectionStateChangedBlock:^(BOOL connected) {
 		if (connected) {
