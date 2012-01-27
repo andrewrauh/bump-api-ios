@@ -33,11 +33,12 @@ Complete Example
 
 ```Objective-C
 - (void) configureBump {
+    // userID is a string that you could use as the user's name, or an ID that is semantic within your environment
     [BumpClient configureWithAPIKey:@"your_api_key" andUserID:[[UIDevice currentDevice] name]];
 
     [[BumpClient sharedClient] setMatchOccurredBlock:^(BumpChannelID channel) { 
 		NSLog(@"Matched with user: %@", [[BumpClient sharedClient] userIDForChannel:channel]); 
-		
+		// data transfer is limited to 500k per message. email us (api@bu.mp) if you want to send larger messages	
 		[[BumpClient sharedClient] sendData:[[NSString stringWithFormat:@"Hello, world!"] dataUsingEncoding:NSUTF8StringEncoding]
 					  toChannel:channel];
     }];
@@ -48,6 +49,7 @@ Complete Example
 		      [NSString stringWithCString:[data bytes] encoding:NSUTF8StringEncoding]);
     }];
 
+    // optional callback
     [[BumpClient sharedClient] setConnectionStateChangedBlock:^(BOOL connected) {
 		if (connected) {
 			NSLog(@"Bump connected...");
@@ -56,6 +58,7 @@ Complete Example
 		}
     }];
 
+    // optional callback
     [[BumpClient sharedClient] setBumpEventBlock:^(bump_event event) {
 		switch(event) {
 		    case BUMP_EVENT_BUMP:
