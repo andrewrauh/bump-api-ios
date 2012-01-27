@@ -32,39 +32,39 @@ Complete Example
 ================
 
 ```Objective-C
-	- (void) configureBump {
-	    [BumpClient configureWithAPIKey:@"your_api_key" andUserID:[[UIDevice currentDevice] name]];
+- (void) configureBump {
+    [BumpClient configureWithAPIKey:@"your_api_key" andUserID:[[UIDevice currentDevice] name]];
 
-	    [[BumpClient sharedClient] setMatchOccurredBlock:^(BumpChannelID channel) { 
-			NSLog(@"Matched with user: %@", [[BumpClient sharedClient] userIDForChannel:channel]); 
-			
-			[[BumpClient sharedClient] sendData:[[NSString stringWithFormat:@"Hello, world!"] dataUsingEncoding:NSUTF8StringEncoding]
-						  toChannel:channel];
-	    }];
+    [[BumpClient sharedClient] setMatchOccurredBlock:^(BumpChannelID channel) { 
+		NSLog(@"Matched with user: %@", [[BumpClient sharedClient] userIDForChannel:channel]); 
+		
+		[[BumpClient sharedClient] sendData:[[NSString stringWithFormat:@"Hello, world!"] dataUsingEncoding:NSUTF8StringEncoding]
+					  toChannel:channel];
+    }];
 
-	    [[BumpClient sharedClient] setDataReceivedBlock:^(BumpChannelID channel, NSData *data) {
-			NSLog(@"Data received on channel %llu: %@", 
-			      channel, 
-			      [NSString stringWithCString:[data bytes] encoding:NSUTF8StringEncoding]);
-	    }];
+    [[BumpClient sharedClient] setDataReceivedBlock:^(BumpChannelID channel, NSData *data) {
+		NSLog(@"Data received on channel %llu: %@", 
+		      channel, 
+		      [NSString stringWithCString:[data bytes] encoding:NSUTF8StringEncoding]);
+    }];
 
-	    [[BumpClient sharedClient] setConnectionStateChangedBlock:^(BOOL connected) {
-			if (connected) {
-				NSLog(@"Bump connected...");
-			} else {
-				NSLog(@"Bump disconnected...");
-			}
-	    }];
+    [[BumpClient sharedClient] setConnectionStateChangedBlock:^(BOOL connected) {
+		if (connected) {
+			NSLog(@"Bump connected...");
+		} else {
+			NSLog(@"Bump disconnected...");
+		}
+    }];
 
-	    [[BumpClient sharedClient] setBumpEventBlock:^(bump_event event) {
-			switch(event) {
-			    case BUMP_EVENT_BUMP:
-					NSLog(@"Bump detected.");
-					break;
-			    case BUMP_EVENT_NO_MATCH:
-					NSLog(@"No match.");
-					break;
-			}
-	    }];
-	} 
+    [[BumpClient sharedClient] setBumpEventBlock:^(bump_event event) {
+		switch(event) {
+		    case BUMP_EVENT_BUMP:
+				NSLog(@"Bump detected.");
+				break;
+		    case BUMP_EVENT_NO_MATCH:
+				NSLog(@"No match.");
+				break;
+		}
+    }];
+} 
 ```
