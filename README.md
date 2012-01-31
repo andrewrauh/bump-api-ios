@@ -6,7 +6,8 @@ This is an all-new version of the Bump iOS API.
 Highlights
 ==========
 
-* faster, smaller. block/GCD based callbacks.
+* faster, smaller. ~400kB is added to an ARM binary after linking. 
+* block/GCD based callbacks.
 * multiple concurrent sessions: once two users have matched, they can continue to send data to each other and other users
 * at the moment breaks compatibility with earlier versions of the API
 
