@@ -32,13 +32,14 @@ typedef void (^BumpConnectionStateChangedBlock)(BOOL connectedToBumpServer);
 
 @interface BumpClient : NSObject {}
 
-+ (BumpClient *) sharedClient;
-
 /* 
-    required configuration prior to accessing the sharedClient
-    after configuration, the client will attempt to connect to Bump.
-*/
+ required configuration prior to accessing the sharedClient
+ after configuration, the client will attempt to connect to Bump.
+ */
 + (void) configureWithAPIKey : (NSString *) key andUserID : (NSString *) userID;
+
+
++ (BumpClient *) sharedClient;
 
 /* setters for callback blocks */
 - (void) setBumpEventBlock : (BumpEventBlock) bumpEventBlock;
