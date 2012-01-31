@@ -31,6 +31,11 @@ Notes
 Release Notes
 =============
 
+Beta 3
+------
+* Additional power saving measures when bumping disabled
+* Fixes two internal bugs, one of which means that it will not match with earlier betas
+
 Beta 2
 ------
 * callback structure changed: BumpClient calls its `matchBlock` when a match occurs.  In order to create a channel (and send data), both users most call `[[BumpClient sharedClient] confirmMatch:YES onChannel:channel];`. When both users confirm a channel, then `BumpClient` will callback its `channelConfirmedBlock`.
