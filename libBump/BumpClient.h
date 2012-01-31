@@ -24,20 +24,20 @@ typedef void (^BumpDataReceivedBlock)(BumpChannelID channel, NSData *data);
 
 + (BumpClient *) sharedClient;
 
-// required configuration
+// required configuration prior to accessing the sharedClient
 + (void) configureWithAPIKey : (NSString *) key andUserID : (NSString *) userName;
+
+// setters for callback blocks
 - (void) setMatchBlock : (BumpMatchBlock) matchBlock;
 - (void) setChannelConfirmedBlock : (BumpChannelConfirmedBlock) confirmedBlock;
+- (void) setConnectionStateChangedBlock : (BumpConnectionStateChangedBlock) connectionBlock;
+- (void) setBumpEventBlock : (BumpEventBlock) bumpEventBlock;
+- (void) setDataReceivedBlock : (BumpDataReceivedBlock) dataReceivedBlock;
 
 // channel methods
 - (void) confirmMatch : (BOOL) confirmed onChannel : (BumpChannelID) proposedChannelID;
 - (void) sendData : (NSData *) data toChannel : (BumpChannelID) channelID;
 - (NSString *) userIDForChannel : (BumpChannelID) channelID;
-
-// optional blocks
-- (void) setConnectionStateChangedBlock : (BumpConnectionStateChangedBlock) connectionBlock;
-- (void) setBumpEventBlock : (BumpEventBlock) bumpEventBlock;
-- (void) setDataReceivedBlock : (BumpDataReceivedBlock) dataReceivedBlock;
 
 // turn bumping on/off; defaults to YES.
 @property (nonatomic) BOOL bumpable;
