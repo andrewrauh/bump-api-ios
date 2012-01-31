@@ -15,7 +15,7 @@ typedef enum {
 } bump_event;
 
 typedef void (^BumpEventBlock)(bump_event event);
-typedef void (^BumpMatchBlock)(BumpChannelID channelID);
+typedef void (^BumpMatchBlock)(BumpChannelID proposedChannelID);
 typedef void (^BumpChannelConfirmedBlock)(BumpChannelID channelID);
 typedef void (^BumpConnectionStateChangedBlock)(BOOL connectedToBumpServer);
 typedef void (^BumpDataReceivedBlock)(BumpChannelID channel, NSData *data);
@@ -30,8 +30,8 @@ typedef void (^BumpDataReceivedBlock)(BumpChannelID channel, NSData *data);
 - (void) setChannelConfirmedBlock : (BumpChannelConfirmedBlock) confirmedBlock;
 
 // channel methods
-- (void) confirmMatch : (BOOL) confirmed onChannel : (BumpChannelID) channel;
-- (void) sendData : (NSData *) data toChannel : (BumpChannelID) channel;
+- (void) confirmMatch : (BOOL) confirmed onChannel : (BumpChannelID) proposedChannelID;
+- (void) sendData : (NSData *) data toChannel : (BumpChannelID) channelID;
 - (NSString *) userIDForChannel : (BumpChannelID) channelID;
 
 // optional blocks
