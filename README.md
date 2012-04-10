@@ -1,5 +1,5 @@
-Bump API 3.0 - iOS Beta
-=======================
+Bump API 3.0
+============
 
 This is an all-new version of the Bump iOS API. 
 
@@ -31,6 +31,12 @@ Notes
 
 Release Notes
 =============
+
+RC1
+---
+
+* removes use of [[UIDevice currentDevice] uniqueIdentifier]
+* includes armv6 binary 
 
 Beta 3
 ------
