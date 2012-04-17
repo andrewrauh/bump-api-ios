@@ -32,6 +32,11 @@ Notes
 Release Notes
 =============
 
+3.0
+--- 
+* setBumpable turns location updates on/off
+* userIDForChannel returns empty string when other user's name is unset
+
 RC1
 ---
 
