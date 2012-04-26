@@ -32,6 +32,11 @@ Notes
 Release Notes
 =============
 
+3.01
+---
+* fixes userId configuration bug
+* adds optional disconnect/connect calls (first call to sharedClient auto-connects)
+
 3.0
 --- 
 * setBumpable turns location updates on/off
